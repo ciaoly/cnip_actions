@@ -48,14 +48,14 @@ jobs:
 
     - name: Convert to Surge Ruleset
       run: |
-        echo "#The china ip list referred to https://github.com/17mon/china_ip_list" > surge_china_ip.list
+        echo "#The china ip list is referred from https://github.com/17mon/china_ip_list" > surge_china_ip.list
         awk '{print "IP-CIDR,"$0}' china_ip_list.txt >> surge_china_ip.list
         git add surge_china_ip.list
       if: steps.diff.outputs.continuing == 'yes'
       
     - name: Convert to Clash rule provider
       run: |
-        echo "#The china ip list referred to https://github.com/17mon/china_ip_list" > clash_cncidr.txt
+        echo "#The china ip list is referred from https://github.com/17mon/china_ip_list" > clash_cncidr.txt
         echo "payload:" >> clash_cncidr.txt
         awk '{print "  - '\''"$0"'\''"}' china_ip_list.txt >> clash_cncidr.txt
         git add clash_cncidr.txt
